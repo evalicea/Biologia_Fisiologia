@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades Interactivas: Dogma Central</title>
+    <style>
+        /* Estilos Generales y Base */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #006D51;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        /* Tipografías y Títulos */
+        h1, h2, h3 {
+            color: #006D51;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 24px;
+            border-left: 10px solid #006D51;
+            padding-left: 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top: 25px;
+        }
+
+        /* Contenedores de Imágenes */
+        .contenedor-imagen {
+            width: 90%;
+            max-width: 700px; 
+            margin: 25px auto; 
+            text-align: center; 
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .contenedor-imagen img {
+            width: 100%; 
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px; 
+        }
+
+        .pie-imagen {
+            font-size: 13px; 
+            color: #444; 
+            margin-top: 10px; 
+            line-height: 1.4;
+        }
+
+        .fuente-imagen {
+            display: block;
+            font-size: 11px;
+            color: #777;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .img-placeholder {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* Estilos del Encabezado (Header) */
+        header {
+            border-bottom: 3px solid #006D51; 
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .logo-placeholder {
+            width: 500px;          
+            height: 240px;             
+            display: flex;
+            align-items: center; 
+            justify-content: center;       
+            margin: 0 auto 10px auto; 
+        }
+
+        .logo-placeholder img {
+            max-width: 200%;     
+            max-height: 200%;    
+            object-fit: contain; 
+        }
+
+        /* Componentes Dinámicos y Actividades */
+        .interactive-demo {
+            border: 2px solid #006D51;
+            padding: 25px;
+            border-radius: 10px;
+            background-color: #f0f7f4;
+            margin-bottom: 20px;
+        }
+                
+        .result { 
+            margin-top: 15px; 
+            font-weight: bold; 
+            color: #006D51; 
+            font-size: 1.1em;
+            padding: 10px;
+            border-left: 5px solid #006D51;
+            background-color: #e8f5e9;
+        }
+
+        .reference-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .activity-box {
+            border: 2px solid #006D51;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+        }
+
+        .drop-zone {
+            display: inline-block;
+            min-width: 60px;
+            height: 30px;
+            border: 1px dashed #006D51;
+            margin: 0 5px;
+            background: #fff;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .draggable {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #006D51;
+            color: #fff;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 4px;
+        }
+
+        .btn-check {
+            background: #006D51;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Estilos del Pie de Página */
+        footer, .pie-pagina-clave {
+            border-top: 3px solid #006D51; 
+            margin-top: 50px;
+            margin-bottom: 10px;
+            padding-top: 15px;
+            text-align: right; 
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .clave-asignatura, .clave-codigo {
+            font-weight: bold;
+            color: #006D51;
+            font-size: 16px;
+        }    
+        
+        /* Estilo para las palabras que tienen definición */    
+        .palabra-definible {
+            color: #006D51; 
+            font-weight: bold;
+            border-bottom: 2px dashed #006D51; /* Línea discontinua debajo */
+            cursor: help; /* Cambia el cursor para indicar que hay ayuda */
+            padding: 0 2px;
+        }
+
+        palabra-definible:hover {
+            background-color: #e8f5e9; 
+            border-radius: 3px;
+        }
+
+        /* --- ESTILOS DEL CUADRO EMERGENTE (MODAL) --- */
+        
+        #contenedor-modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            z-index: 1000; /* Por encima de todo lo demás */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Permite scroll si la definición es larga */
+            background-color: rgba(0,0,0,0.5); /* Fondo negro semitransparente */
+        }
+
+        /* 2. El cuadro blanco con la definición */
+        .modal-contenido {
+            background-color: #fcfdf5; 
+            margin: 15% auto; 
+            padding: 20px;
+            border: 2px solid #006D51; 
+            width: 80%; /
+            max-width: 500px; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative; 
+        }
+
+        .modal-contenido h4 {
+            color: #006D51;
+            margin-top: 0;
+            text-transform: none;
+        }
+
+        /* El botón de cerrar (x) */
+        .boton-cerrar {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton-cerrar:hover,
+        .boton-cerrar:focus {
+            color: #006D51; 
+            text-decoration: none;
+        }
+        
+        .contenedor-imagen img {
+            cursor: zoom-in; /* Cambia el cursor a una lupa para indicar que es clickeable */
+            transition: transform 0.2s ease;
+        }
+
+        .contenedor-imagen img:hover {
+            transform: scale(1.02); /* Efecto visual sutil al pasar el mouse */
+        }
+
+        /* Pantalla completa oscura de fondo */
+        .lightbox-overlay {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 2000; /* Se asegura de estar por encima de todo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo negro translúcido */
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out; /* Indica que al hacer clic se cerrará */
+        }
+
+        /* Estilo de la imagen ya ampliada */
+        .lightbox-imagen-ampliada {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: efectoZoom 0.2s ease-out;
+        }
+
+        /* Animación fluida de apertura */
+        @keyframes efectoZoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-placeholder">
+            <img src= "imagenes/logo.png" alt="logo">
+         </div>   
+        <h1>AD.02.05.01 Estructura y función del núcleo celular: ADN, Duplicación del ADN, Transcripción, Traducción</h1>
+    </header>
+
+<section> <h2>INTRODUCCIÓN</h2>
+    <div class="info-box">
+        <p>
+            El núcleo celular se reconoce como el organelo más prominente de la célula eucariota, actuando como el 
+            <span class="highlight">centro de control</span> que resguarda el genoma y dirige la actividad biológica. 
+            Esta estructura, delimitada por una envoltura nuclear perforada por poros complejos, resguarda el 
+            <span class="highlight">ADN</span> que contiene todas las instrucciones necesarias para la construcción y 
+            operación de la maquinaria celular.
+        </p>
+        
+        <p>
+            La transmisión y ejecución de estas instrucciones ocurren a través de los procesos clave del 
+            <span class="highlight">Dogma Central de la Biología Molecular:</span> la replicación para la herencia del 
+            material genético, la transcripción para la síntesis de ARN mensajero y la traducción para el ensamblaje 
+            de proteínas funcionales. 
+        </p>
+
+        <p>
+            Para el estudiante en <span class="highlight">Biotecnología,</span> comprender la arquitectura nuclear y la 
+            fidelidad de estos procesos es esencial, ya que cualquier alteración en este flujo de información puede 
+            impactar directamente en la homeostasis celular y es la base para el desarrollo de nuevas <span class="highlight">terapias biotecnológicas.</span>
+            
+        </p>
+    </div>
+
+</section>
+
+    <section>
+        <h2>1 ARQUITECTURA Y COMPONENTES DEL NÚCLEO</h2>
+        <p>El núcleo celular se reconoce como el organelo más prominente de la célula eucariota, actuando como el centro de control que resguarda el <span class="highlight">genoma</span> y dirige la actividad biológica. 
+        <span class="highlight">El nucleoplasma</span> está en contacto permanente con el citoplasma celular a través de los poros de la membrana nuclear. Está compuesto por <span class="highlight">ADN (ácido desoxirribonucleico),</span> 
+        <span class="highlight">proteínas</span> y <span class="highlight">ARN (ácido ribonucleico),</span> desempeña un papel vital en la síntesis de proteínas y la transmisión de información genética desde una generación a la siguiente. </p>
+        
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_1.png" alt="Nucleo celular">
+    <figcaption class="pie-imagen">
+        <strong>Figura 1.</strong> Estructura del núcleo celular.
+        <span class="fuente-imagen">Fuente: Figurelabs / https://chat.figurelabs.ai/.</span>
+    </figcaption>
+</figure>        
+        <h3>1.1 Envoltura Nuclear y Poros</h3>
+        <p>La <span class="highlight">envoltura nuclear</span> consta de dos membranas concéntricas separadas por un espacio perinuclear de 10 a 50 nm, la exterior en continuidad con el retículo endoplásmico rugoso. Esta barrera está perforada por el 
+        <span class="highlight">complejo del poro nuclear (CPN),</span> una estructura de simetría octagonal compuesta por cerca de 100 proteínas que regula el tráfico selectivo de macromoléculas. Las proteínas destinadas al núcleo poseen una 
+        <span class="highlight">Señal de Localización Nuclear (SLN)</span> que les permite el paso a través de estos poros.</p>
+
+        <h3>1.2 Nucleolo y Lámina Nuclear</h3>
+        <p>El <span class="highlight">nucleolo</span> es una región densa encargada de la síntesis del ARN ribosomal (ARNr) y el ensamblado de las subunidades ribosómicas. Por otro lado, la <span class="highlight">lámina nuclear,</span> 
+           compuesta por proteínas llamadas <span class="highlight">láminas,</span> reviste la superficie interna de la envoltura, proporcionando soporte mecánico y sitios de anclaje para la <span class="highlight">cromatina.</span></p>
+    </section>
+
+    <section>
+        <h2>2 ORGANIZACIÓN DEL MATERIAL GENÉTICO (ADN)</h2>
+        <p>El <span class="highlight">ADN nuclear</span> en eucariotas es una molécula lineal de <span class="highlight">doble hélice</span> que debe compactarse drásticamente para caber en el núcleo. En la <span class="highlight"> Figura 2</span>, se pueden distinguir el nivel de condensación del material genético
+        desde la molécula de ADN, hasta la formación de los cromosomas.</p>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_2.png" alt="Nucleo celular">
+    <figcaption class="pie-imagen">
+        <strong>Figura 2.</strong> Niveles de condensación del ADN.
+        <span class="fuente-imagen">Fuente: Figurelabs / https://chat.figurelabs.ai/.</span>
+    </figcaption>
+</figure> 
+
+        <h3>2.1 El Nucleosoma y Fibras de Cromatina</h3>
+        <p>El nivel básico de empaquetamiento es el <span class="highlight">nucleosoma</span>, constituido por un <span class="highlight">octámero de proteínas histonas</span> (dos de cada una: H2A, H2B, H3 y H4) alrededor del cual se enrollan casi dos vueltas de ADN 
+            (146 <span class="palabra-definible" data-def="pb">pb</span>). Estos nucleosomas se organizan en fibras de 10 nm (nanómetros) denominadas "cuentas de rosario" y posteriormente en fibras de 30 nm o solenoides, mediadas por la histona H1.</p>
+
+        <h3>2.2 Eucromatina y Heterocromatina</h3>
+        <p>La cromatina presenta dos estados funcionales: la <span class="highlight">eucromatina,</span> de conformación abierta y transcripcionalmente activa, y la <span class="highlight">heterocromatina,</span> densamente empaquetada e inactiva. 
+            La heterocromatina puede ser constitutiva (permanente en centrómeros y telómeros) o facultativa (inactivada en etapas específicas).</p>
+    </section>
+
+     <section>
+        <h2>3. NUCLEÓTIDOS</h2>
+        <p>Los ácidos nucleicos (<span class="highlight">ADN y ARN</span>) son polímeros de alto peso molecular formados por la unión de unidades llamadas <span class="highlight">nucleótidos.</span> Cada nucleótido consta de tres componentes fundamentales:</p>
+        
+        <div class="info-box">
+            <ul>
+                <li><span class="highlight">Un grupo fosfato:</span> Que aporta el carácter ácido a la molécula.</li>
+                <li><span class="highlight">Un azúcar de cinco carbonos (Pentosa):</span> <span class="highlight">Desoxirribosa</span> en el ADN y <span class="highlight">ribosa</span> en el ARN.</li>
+                <li><span class="highlight">Una base nitrogenada:</span> Puede ser de dos tipos, <span class="highlight">Purina o Pirimidina</span>
+                    <ul>
+                        <li><span class="highlight">Purinas:</span> Estas tienen una estructura de doble anillo, incluyen a la <span class="highlight">Adenina (A) y Guanina (G).</span></li>
+                        <li><span class="highlight">Pirimidinas:</span> Tienen una estructura de anillo simple, incluyen a la <span class="highlight">Citosina (C),</span> <span class="highlight">Timina (T)</span> —exclusiva del ADN— y <span class="highlight">Uracilo (U)</span> —exclusivo del ARN—.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_3.png" alt="acidos nucelicos">
+    <figcaption class="pie-imagen">
+        <strong>Figura 3.</strong> <span class="highlight">(A)</span> Estructura química de un nucleótido. <span class="highlight">(B)</span> Bases Nitrogenadas.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>        
+    </section>
+
+        <h3>3.1 Doble hélice del ADN</h3>
+        <p>La estructura del ADN fue propuesta por <span class="highlight">Watson y Crick</span> en 1953, con ayuda de los descubrimientos de <span class="highlight">Rosalind Franklin</span> y muchos otros científicos que estudiaron los ácidos nucleicos. 
+            Consiste en <span class="highlight">dos cadenas de polinucleótidos</span> entretejidas y mantenidas juntas por el emparejamiento de sus bases mediante <span class="highlight">puentes de hidrógeno</span> hasta formar una doble hélice. Las bases 
+            <span class="highlight">adenina y timina</span> se enlazan a través de <span class="highlight">dos puentes de hidrógeno</span> entre las cadenas opuestas, mientras que la <span class="highlight">guanina y la citosina</span> lo hacen a través de 
+            <span class="highlight">tres puentes.</span></p>
+
+        <p>Un aspecto fundamental de esta estructura es que las dos cadenas son <span class="highlight">antiparalelas;</span> para entenderlo, imagina una calle de doble sentido donde los autos corren en direcciones opuestas. En el ADN ocurre lo mismo: 
+            cada cadena tiene una dirección química basada en los carbonos numerados de su azúcar (desoxirribosa). El extremo <span class="highlight">5' (cinco prima)</span> es el inicio de la cadena y termina con un <span class="highlight">grupo fosfato,</span> 
+            mientras que el extremo <span class="highlight">3' (tres prima)</span> es el final y termina con un grupo <span class="highlight">hidroxilo (-OH).</span></p>
+
+        <p>Las cadenas <span class="highlight">corren en sentidos invertidos:</span> si miras la doble hélice de arriba hacia abajo, notarás que una cadena va en dirección de <span class="highlight">5' a 3',</span> mientras que la cadena de enfrente está "de cabeza", 
+            orientada en dirección de <span class="highlight">3' a 5'.</span> Esta colocación invertida es biológicamente exacta y necesaria; si ambas cadenas corrieran en la misma dirección, las bases nitrogenadas no podrían alinearse de frente ni encajar entre sí 
+            para formar los <span class="highlight">puentes de hidrógeno</span> que mantienen unida la molécula.</p>
+
+<div id="contenedor-modal" class="modal-oculto">
+    <div class="modal-contenido">
+        <span class="boton-cerrar" id="cerrar-modal">&times;</span>
+        <h4 id="titulo-definicion">Título de la Palabra</h4>
+        <p id="texto-definicion">Aquí aparecerá la definición...</p>
+    </div>
+</div>
+
+
+ <figure class="contenedor-imagen">
+    <img src="imagenes/imagen_4.png" alt="estructura del ADN">
+    <figcaption class="pie-imagen">
+        <strong>Figura 4.</strong> Esturctura de la doble hélice del ADN.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure> 
+
+        <h3>3.2 Moléculas de ARN</h2>
+        <p>El <span class="highlight">ARN</span> es ácido nucleico más abundante en la célula eucariota donde suele ser 10 veces más abundante que el ADN, se diferencia de ADN en tres características principales.</p>
+        <div class="info-box">
+            <ul>
+                <li>El ARN suele ser <span class="highlight">monocatenario</span> (una sola cadena).</li>
+                <li>Contiene <span class="highlight">Uracilo</span> <span class="highlight">en lugar de timina.</li>
+                <li>La pentosa que constituye a sus nucleótidos es la <span class="highlight">ribosa</span> en lugar de la 2-desoxirribosa del ADN (la presencia del grupo hidroxilo en el C2' de la ribosa provoca inestabilidad en la molécula).</li>
+
+ <figure class="contenedor-imagen">
+    <img src="imagenes/imagen_5.png" alt="estructura del ARN">
+    <figcaption class="pie-imagen">
+        <strong>Figura 5.</strong> Estructura química del ARN monocatenario (una cadena).
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure> 
+                </li>
+            </ul>
+        </div>
+    </section>
+
+   </section>
+
+        <h3>3.3 Tipos de ARN</h2>
+        <p>Existen diferentes tipos de ARN, químicamente son iguales, pero tienen <span class="highlight">funciones distintas</span> en la célula, los principales son:.</p>
+        <div class="info-box">
+            <ul>
+                <li><span class="highlight">ARN heterogéneo nuclear (ARNhn)</span> También conocido como trasncrito primario o Pre ARN mensajero (pre-ARNm), de alto peso molecular, es producto inicial del proceso denominado <span class="highlight">transcripción</span> 
+                contiene la información contenida en el ADN, en las células eucariotas se sintetiza en el núcleo y necesita una <span class="highlight">maduración o modificaciones postranscripcionales</span> para formar el <span class="highlight">ARNm,</span> 
+                en las células procariotas actúa directamente como <span class="highlight">molde</span> para la síntesis de proteínas.</li>
+                <li><span class="highlight">ARN mensajero (ARNm)</span> Es la molecula que resulta de la <span class="highlight">modificación postraduccional del ARNhn,</span> sirve de molde para la síntesis de proteínas en el proceso de <span class="highlight">traducción</span> 
+                y contiene la información para la <span class="highlight">síntesis de proteínas,</span> su longitud es variable según la proteína para la que codifique y contiene las señales necesarias para el <span class="highlight">inicio y término de la traducción.</span> 
+                Las modificaciones que presenta son en el <span class="highlight">extremo 5' muestra una caperuza (cap)</span> es un nucleótido modificado de <span class="highlight">7-metilguanosina</span> actúa como una protección contra enzimas destructivas y como una señal 
+                para el <span class="highlight">acoplamento en el ribosoma.</span> <span class="highlight">En el extremo 3' presenta una cola de poliA</span> que permite la protección contra las enzimas destructivas.</li>
+                <li><span class="highlight">ARN ribosomal (ARNr)</span> El ARNr forma parte de los <span class="highlight">ribosomas.</span> Sus estructuras secundaria y terciaria presentan un plegamiento complejo que le permite asociarse tanto a las 
+                proteínas de los ribosomas como a otros ARNr y <span class="highlight">participar en el proceso de síntesis proteica.</span></li>
+                <li><span class="highlight">ARN de transferencia (ARNt)</span> El ARN de transferencia (ARNt) es una molécula pequeña de ARN que cumple una función clave en la <span class="highlight">síntesis proteica.</span> El ARN de transferencia sirve como <span class="highlight">"adaptador"</span>
+                entre la molécula de ARN mensajero (ARNm) y la cadena creciente de aminoácidos que forman una proteína. Cada vez que se agrega un aminoácido a la cadena, un ARNt específico se empareja con su <span class="highlight">secuencia complementaria en la molécula de ARNm</span>  y así se garantiza 
+                que el aminoácido correcto se inserte en la proteína que se está sintetizando.</li>
+
+ <figure class="contenedor-imagen">
+        <img src="imagenes/imagen_6.png" alt="TIPOS DE ARN">
+    <figcaption class="pie-imagen">
+        <strong>Figura 6.</strong> Diferentes tipos de ARN y sus características.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>   
+
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>4 EL DOGMA CENTRAL DE LA BIOLOGÍA MOLECULAR</h2>
+        <p>La transmisión de la información genética ocurre a través de tres procesos clave: <span class="highlight">replicación, transcripción y traducción.</span></p>
+
+<figure class="contenedor-imagen">
+   <img src="imagenes/imagen_7.png" alt="DOGMA">
+    <figcaption class="pie-imagen">
+        <strong>Figura 7.</strong> Dogma Central de la Biología Molecular.
+        <span class="fuente-imagen">Fuente: Figurelabs / https://chat.figurelabs.ai/</span>
+    </figcaption>
+</figure>  
+
+        <h3>4.1 Replicación del ADN</h3>
+        <p>La replicación del ADN es el proceso mediante el cual se <span class="highlight">duplica una molécula de ADN.</span> Cuando una <span class="highlight">célula se divide,</span> en primer lugar, debe duplicar su <span class="highlight">genoma</span> para que cada 
+            célula hija contenga un juego completo de cromosomas.</span> Distintas enzimas participan para que se lleve a cabo el proceso. En la <span class="highlight"> Figura 8,</span> se aprecia <span class="highlight">el proceso de replicación</span> y algunas enzimas que participan en el proceso, 
+            entre las principales están:</p>
+        <ul>
+            <li><span class="highlight">Helicasas:</span> Separan las hebras del ADN consumiendo ATP.</li>
+            <li><span class="highlight">ADN Polimerasas:</span> Sintetizan la nueva cadena en dirección 5' a 3'.</li>
+            <li><span class="highlight">Ligasas:</span> Unen los <span class="highlight">Fragmentos de Okazaki</span> los cuales son segmentos de ADN sintetizados de forma discontinua en la hebra retrasada.</li>
+        </ul>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_8.png" alt="Replicación">
+    <figcaption class="pie-imagen">
+        <strong>Figura 8.</strong> Horquilla de replicación del ADN y las enzimas que intervienen.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>  
+
+        <h3>4.2 Transcripción</h3>
+        <p>Es el proceso de <span class="highlight">generación de una copia de ARN</span> a partir de una <span class="highlight">secuencia de ADN de un gen.</span> 
+            Esta copia, llamada <span class="highlight">ARN mensajero (ARNm),</span> es portadora de la información sobre la proteína que el gen tiene codificada en ADN. En las células eucariotas, 
+            el ARN se desplaza desde el núcleo de la célula al citoplasma, donde se usa para <span class="highlight">sintetizar la proteína codificada.</span></p>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_9.png" alt="Transcripción">
+    <figcaption class="pie-imagen">
+        <strong>Figura 9.</strong> Proceso de transcripción y maduración del ARN (Splicing).
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>  
+
+        <h3>4.3 Traducción</h3>
+        <p>Es la síntesis de proteínas en el citoplasma siguiendo el código genético. Requiere de <span class="highlight">ribosomas, ARNt (adaptadores) y ARNm (mensaje).</span> 
+            Los aminoácidos se ensamblan en el orden dictado por los <span class="highlight">codones o tripletes</span>  (conjunto de tres nucleótidos) del ARNm hasta encontrar un codón (triplete) de terminación.</p>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_10.png" alt="Traducción">
+    <figcaption class="pie-imagen">
+        <strong>Figura 10.</strong> Proceso de Traducción en el ribosoma.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>
+
+    </section>
+
+    <section>
+        <h2>5 CÓDIGO GENÉTICO</h2>
+        <p>Un <span class="highlight">gen</span> contiene la información necesaria para transcribirse en un ARNm, que a su vez pude expresarse como una proteína. Esta expresión se da debido a que las instrucciones trasladadas del ADN al ARN 
+            y en especial del <span class="highlight">ARNm</span> a las proteínas se transmite en forma de <span class="highlight">códigos</span>.</p>
+         </p> 
+        El ADN está formado por <span class="highlight">cuatro bases nitrogenadas</span>  (A, G, C, T). la forma en la que se codifica la información es en grupos de tres nucleótidos, lo que conforma un <span class="highlight"> triplete o codón</span>, 
+        que representará un aminoácido o señal específica, que la célula interpreta durante el proceso de traducción. De esta manera, ya que se dispone de cuatro bases diferentes, se tienen <span class="highlight"> 64 diferentes combinaciones</span>  posibles de tres nucleótidos, 
+        <span class="highlight">61</span> codifican para aminoácidos y <span class="highlight">tres</span> marcan la <span class="highlight">terminación</span> de la traducción, lo que permite asignar de manera adecuada un  <span class="highlight">código de tres bases</span> para la formación de cada uno 
+        de los <span class=" highlight">20 aminoácidos</span>  presentes en las proteínas y así poder descifrar el <span class="highlight" >mensaje genético contenido en el ADN</span></span>. 
+        Este sistema de códigos se denomina <span class=" highlight">código genético</span>. En la <span class="highlight"> Figura 11</span> se muestra la tabla del código genético, indicando los tripletes y los aminoácidos para los que codifica </p>
+         
+            <h3>5.1 Características del código genético</h3>
+            <P>El código genético presenta las siguientes características: </P>
+        <div class="info-box">
+            <ul>
+                <li><span class="highlight">Es un código de tripletes:</span> Tres nucleótidos especifican un aminoácido.</li>
+                <li><span class="highlight">Es degenerado:</span> Existen más codones (64) que aminoácidos (20), por lo que varios codones pueden codificar el mismo aminoácido.</li>
+                <li><span class="highlight">Es casi universal:</span> Se utiliza de la misma forma en prácticamente todos los organismos, desde bacterias hasta seres humanos.</li>
+                <li><span class="highlight">No es solapante:</span> Cada nucleótido pertenece a un único codón y el ribosoma los lee de tres en tres sin saltarse ninguno.</li>
+            </ul>
+        </div>
+
+        </ul>
+
+<figure class="contenedor-imagen">
+    <img src="imagenes/imagen_11.png" alt="Código genético">
+    <figcaption class="pie-imagen">
+        <strong>Figura 11.</strong> <span class="highlight">Código Genético.</span>  Representado por tripletes de nucleótidos que son utilizados para descifrar a cada uno de los 20 aminoácidos que se encuentran en las proteínas eucariotas.
+        <span class="fuente-imagen">Fuente: Gemini / https://gemini.google.com/app/</span>
+    </figcaption>
+</figure>
+
+    </section>
+
+<section>
+    <h2>6 EL CÓDIGO GENÉTICO INTERACTIVO</h2>
+    <div class="info-box">
+        <p>El código genético traduce el lenguaje de nucleótidos (codones) al lenguaje de aminoácidos. En la siguiente simulación se encuentran los 64 codones, seleccionando cualquiera de los 64 codones, para ver qué aminoácido produce o si es una señal de terminación. Compruébalo con la tabla del código de la <span class="highlight">Figura 11.</span></p>
+    </div>
+
+    <div class="interactive-demo">
+        <label>Selecciona un codón de ARNm (5' &rarr; 3'):</label>
+        <select id="codon-selector" onchange="showAminoacid()">
+            <option value="">Selecciona un triplete...</option>
+            <!-- BLOQUE U -->
+            <option value="Fenilalanina (Phe)">UUU</option>
+            <option value="Fenilalanina (Phe)">UUC</option>
+            <option value="Leucina (Leu)">UUA</option>
+            <option value="Leucina (Leu)">UUG</option>
+            <option value="Serina (Ser)">UCU</option>
+            <option value="Serina (Ser)">UCC</option>
+            <option value="Serina (Ser)">UCA</option>
+            <option value="Serina (Ser)">UCG</option>
+            <option value="Tirosina (Tyr)">UAU</option>
+            <option value="Tirosina (Tyr)">UAC</option>
+            <option value="PARO (Fin de la síntesis)">UAA</option>
+            <option value="PARO (Fin de la síntesis)">UAG</option>
+            <option value="Cisteína (Cys)">UGU</option>
+            <option value="Cisteína (Cys)">UGC</option>
+            <option value="PARO (Fin de la síntesis)">UGA</option>
+            <option value="Triptófano (Trp)">UGG</option>
+            
+            <!-- BLOQUE C -->
+            <option value="Leucina (Leu)">CUU</option>
+            <option value="Leucina (Leu)">CUC</option>
+            <option value="Leucina (Leu)">CUA</option>
+            <option value="Leucina (Leu)">CUG</option>
+            <option value="Prolina (Pro)">CCU</option>
+            <option value="Prolina (Pro)">CCC</option>
+            <option value="Prolina (Pro)">CCA</option>
+            <option value="Prolina (Pro)">CCG</option>
+            <option value="Histidina (His)">CAU</option>
+            <option value="Histidina (His)">CAC</option>
+            <option value="Glutamina (Gln)">CAA</option>
+            <option value="Glutamina (Gln)">CAG</option>
+            <option value="Arginina (Arg)">CGU</option>
+            <option value="Arginina (Arg)">CGC</option>
+            <option value="Arginina (Arg)">CGA</option>
+            <option value="Arginina (Arg)">CGG</option>
+
+            <!-- BLOQUE A -->
+            <option value="Isoleucina (Ile)">AUU</option>
+            <option value="Isoleucina (Ile)">AUC</option>
+            <option value="Isoleucina (Ile)">AUA</option>
+            <option value="Metionina (INICIO / Met)">AUG</option>
+            <option value="Treonina (Thr)">ACU</option>
+            <option value="Treonina (Thr)">ACC</option>
+            <option value="Treonina (Thr)">ACA</option>
+            <option value="Treonina (Thr)">ACG</option>
+            <option value="Asparagina (Asn)">AAU</option>
+            <option value="Asparagina (Asn)">AAC</option>
+            <option value="Lisina (Lys)">AAA</option>
+            <option value="Lisina (Lys)">AAG</option>
+            <option value="Serina (Ser)">AGU</option>
+            <option value="Serina (Ser)">AGC</option>
+            <option value="Arginina (Arg)">AGA</option>
+            <option value="Arginina (Arg)">AGG</option>
+
+            <!-- BLOQUE G -->
+            <option value="Valina (Val)">GUU</option>
+            <option value="Valina (Val)">GUC</option>
+            <option value="Valina (Val)">GUA</option>
+            <option value="Valina (Val)">GUG</option>
+            <option value="Alanina (Ala)">GCU</option>
+            <option value="Alanina (Ala)">GCC</option>
+            <option value="Alanina (Ala)">GCA</option>
+            <option value="Alanina (Ala)">GCG</option>
+            <option value="Ácido aspártico (Asp)">GAU</option>
+            <option value="Ácido aspártico (Asp)">GAC</option>
+            <option value="Ácido glutámico (Glu)">GAA</option>
+            <option value="Ácido glutámico (Glu)">GAG</option>
+            <option value="Glicina (Gly)">GGU</option>
+            <option value="Glicina (Gly)">GGC</option>
+            <option value="Glicina (Gly)">GGA</option>
+            <option value="Glicina (Gly)">GGG</option>
+        </select>
+        <div id="codon-result" class="result"></div>
+    </div>
+</section>
+
+     <section>
+        <h2>7 PROCESOS DEL DOGMA CENTRAL</h2>
+        
+        <h3>7.1 Replicación</h3>
+        <p>Es un proceso semiconservador donde el ADN se desenrolla y cada hebra parental sirve de molde para una nueva hebra hija, la complementariedad es <span class="highlight">Adenina-Timina y Guanina-Citocina</span>. </p>
+        </p><span class="highlight">Comprueba lo aprendido:</span> Copia la cadena ADN molde en tu libreta, completa cada nucleótido con su complementario, posteriormente da click en "Simular Replicación" y comprueba.</p>
+        <div class="interactive-demo">
+            <p><strong>Cadena de ADN:</strong>5' A T G C T A T T A C C G A A A T A A    3'</p>
+            <button onclick="runReplication()">Simular Replicación</button>
+            <div id="rep-result" class="result"></div>
+            <p></p>
+        </div>
+
+        <h3>7.2 Transcripción (De ADN a ARN)</h3>
+        <p>La RNA polimerasa lee el ADN molde y sintetiza un ARNm complementario, sustituyendo Timina por Uracilo.</p>
+        </p><span class="highlight">Comprueba lo aprendido:</span> Copia la cadena ADN molde en tu libreta, completa cada nucleótido con su complementario (Recuerda sustituir la Timina por el Uracilo), posteriormente da click en "Simular 
+        transcripción" y comprueba.</p>
+        <div class="interactive-demo">
+            <p><strong>ADN Molde:</strong> 3' T A C G A T A A T G G C T T T A T T 5' </p>
+            <button onclick="runTranscription()">Simular Transcripción</button>
+            <div id="trans-result" class="result"></div>
+        </div>
+    
+
+        <h3>7.3 Traducción (De ARN a Proteína)</h3>
+        <p>El ribosoma lee los codones del ARNm y, con ayuda del ARNt, ensambla los aminoácidos en una cadena polipeptídica.</p>
+        </p><span class="highlight">Comprueba lo aprendido:</span> Copia la cadena ARNm en tu libreta, con ayuda del código genético, busca los tripletes e identifica cual aminiácido codifica, colócalos en tu libreta, 
+        posteriormente da click en "Simular Traducción" y comprueba.</p>
+        <div class="interactive-demo">
+            <p><strong>ARNm:</strong> 5' ATG - CTA - TTA - CCG - AAA - TAA 3'</p>
+            <button onclick="runTranslation()">Simular Traducción</button>
+            <div id="trad-result" class="result"></div>
+        </div>
+    </section> 
+
+
+    <section class="reference-section">
+        <h2>REFERENCIAS BIBLIOGRÁFICAS</h2>
+        <p><span class="highlight">Alberts, B., Bray, D., & Hopkin, K.</span> (2011). <i>Introducción a la biología celular</i>. Médica Panamericana.</p>
+        <p><span class="highlight">Gama, M. Á.</span> (2012). <i>Biología 1: Competencias + Aprendizaje + Vida</i>. Pearson Education.</p>
+        <p><span class="highlight">Herraez, A.</span> (2012). <i>Biología molecular e ingeniería genética</i>. Elsevier.</p>
+        <p><span class="highlight">Instituto Nacional de Investigación del Genoma Humano. </span>(s.f.). <i>Glosario de términos genéticos. National Institutes of Health. Recuperado el 1 de junio de 2026,</i> de https://www.genome.gov/es/genetics-glossary</p>
+        <p><span class="highlight">Karp, G. (2014).</span> <i>Biología celular y molecular: Conceptos y experimentos</i>. McGraw Hill.</p>
+        <p><span class="highlight">Luque, J., & Herráez, Á.</span> (2001). <i>Biología Molecular e Ingeniería Genética</i>. Elsevier.</p>
+        <p><span class="highlight">Salazar, M., Sandoval, R., Armendariz, B.</span> (2013). <i>Biología molecular: fundamentos y aplicaciones en las ciencias de la salud.</i>. McGraw Hill.</p>
+    </section>
+
+<footer style="margin-top: 50px; border-top: 1px solid #006D51; font-size: 12px; text-align: center; padding-top: 30px; padding-bottom: 30px;">
+    <div class="pie-pagina-clave">
+        Clave de la asignatura:<br>
+        <span class="clave-codigo">E-BYFC-1</span>
+    </div>
+    
+    <div style="width: 200%; max-width: 1000px; margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center;">
+        <img src="imagenes/pie.png" alt="UTTT" style="width: 100%; height: auto; object-fit: contain;">
+    </div>
+            
+    <p style="margin: 0;">Derechos reservados © 2026 por la Universidad Tecnológica Tula-Tepeji.</p>
+</footer>
+</div>
+
+<script>
+    // --- Funciones del Dogma Central y Simuladores ---
+    function showAminoacid() {
+        const val = document.getElementById('codon-selector').value;
+        const res = document.getElementById('codon-result');
+        res.innerHTML = val ? "Aminoácido resultante: " + val : "";
+    }
+
+    function runReplication() {
+        const res = document.getElementById('rep-result');
+        res.style.display = "block";
+        res.innerHTML = "Hebra Nueva de ADN: 3'  T A C G A T A A T G G C T T T A T T  5' (Complementariedad A-T, G-C)";
+    }
+
+    function runTranscription() {
+        document.getElementById('trans-result').innerHTML = "ARNm Transcrito: 5'  A U G C U A U U A C C G A A A U A A  3' (Timina es sustituida por Uracilo)";
+    }
+
+    function runTranslation() {
+        document.getElementById('trad-result').innerHTML = "Proteína: Metionina-Leucina-Leucina-Prolina-Lisina-*Fin (¿Sabías que todas las proteínas inician con Metionina? ¿Y que existen 3 codones de paro o fin de la transcripción?)";
+    }
+    
+    function allowDrop(ev) { ev.preventDefault(); }
+    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+    
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.ondragover = allowDrop;
+        zone.ondrop = function(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.innerText = data;
+        };
+    });
+
+    function checkTranscription() {
+        const r = [document.getElementById('d1').innerText, document.getElementById('d2').innerText, 
+                   document.getElementById('d3').innerText, document.getElementById('d4').innerText];
+        const correct = ["GGU", "CAA", "UCU", "GCU"];
+        const fb = document.getElementById('fb-transcription');
+        if (JSON.stringify(r) === JSON.stringify(correct)) {
+            fb.innerHTML = "¡Excelente! Has transcrito correctamente la secuencia de la miosina.";
+            fb.style.color = "green";
+        } else {
+            fb.innerHTML = "Intenta de nuevo. Recuerda: A-U, C-G, T-A, G-C.";
+            fb.style.color = "red";
+        }
+    }
+
+    function checkTranslation() {
+        const s1 = document.getElementById('s1').value;
+        const s2 = document.getElementById('s2').value;
+        const fb = document.getElementById('fb-translation');
+        if (s1 === "correct" && s2 === "correct") {
+            fb.innerHTML = "¡Correcto! Los aminoácidos corresponden a los codones indicados.";
+            fb.style.color = "green";
+        } else {
+            fb.innerHTML = "Verifica tu tabla del código genético e intenta de nuevo.";
+            fb.style.color = "red";
+        }
+    }
+    
+    // --- Lógica de Ampliación de Imágenes (Lightbox Mejorado) ---
+    const visorLightbox = document.getElementById('lightbox-visor');
+    const imagenMaximizada = document.getElementById('imagen-maximizada');
+    
+    // MEJORA: Ahora busca imágenes en ambos tipos de contenedores educativos
+    const todasLasImagenes = document.querySelectorAll('.contenedor-imagen img, .img-placeholder img');
+
+    // Control de seguridad: solo ejecuta si el HTML del visor existe en la página
+    if (visorLightbox && imagenMaximizada) {
+        todasLasImagenes.forEach(img => {
+            img.style.cursor = 'zoom-in'; // Asegura que aparezca la lupa al pasar el mouse
+            img.addEventListener('click', () => {
+                imagenMaximizada.src = img.src; // Clona la ruta de la imagen original
+                visorLightbox.style.display = 'flex'; // Activa el contenedor centrado
+            });
+        });
+
+        // Cierra el visor al hacer clic en cualquier parte de la pantalla oscura
+        visorLightbox.addEventListener('click', () => {
+            visorLightbox.style.display = 'none';
+        });
+    } else {
+        // Mensaje de diagnóstico interno por si olvidaste el Paso 1
+        console.warn("Falta el contenedor HTML con el ID 'lightbox-visor' para poder ampliar las imágenes.");
+    }
+</script>
+
+<script>
+    // 1. DICCIONARIO DE DEFINICIONES
+    
+    const definiciones = {
+        "pb": "Un par de bases está formado por dos bases nitrogenadas de ADN complementarias que se emparejan y forman un “peldaño de la escalera del ADN”. El ADN está compuesto por dos cadenas complementarias que se enrollan entre sí y recuerdan a una escalera de caracol; esa formación se conoce como doble hélice. Cada hebra tiene una estructura básica compuesta por grupos alternados de azúcar (desoxirribosa) y fosfato. Unida a cada azúcar hay una de cuatro bases: adenina (A), citosina (C), guanina (G) o timina (T). Las dos hebras se mantienen unidas por puentes de hidrógeno entre los pares de bases: los pares de adenina con timina y los pares de citosina con guanina.",
+        
+    };
+
+    // 2. REFERENCIAS A ELEMENTOS HTML
+    const modal = document.getElementById("contenedor-modal");
+    const tituloDef = document.getElementById("titulo-definicion");
+    const textoDef = document.getElementById("texto-definicion");
+    const botonCerrar = document.getElementById("cerrar-modal");
+
+    // 3. FUNCIONES
+
+    // Función para abrir el cuadro
+    function abrirModal(event) {
+        // Obtenemos el término clave desde el atributo data-def del elemento clickeado
+        const terminoClave = event.target.getAttribute("data-def");
+        const textoPalabra = event.target.innerText;
+
+        // Buscamos la definición en nuestro diccionario
+        const definicionTexto = definiciones[terminoClave];
+
+        if (definicionTexto) {
+            tituloDef.innerText = textoPalabra; // Ponemos la palabra clickeada como título
+            textoDef.innerText = definicionTexto; // Ponemos la definición
+            modal.style.display = "block"; // Mostramos el contenedor
+        }
+    }
+
+    // Función para cerrar el cuadro
+    function cerrarModal() {
+        modal.style.display = "none";
+    }
+
+    // 4. EVENT LISTENERS (DETECTORES DE EVENTOS)
+
+    // Buscamos todas las palabras clickeables y les añadimos el detector de clicks
+    const palabras = document.querySelectorAll(".palabra-definible");
+    palabras.forEach(palabra => {
+        palabra.addEventListener("click", abrirModal);
+    });
+
+    // Detectar click en el botón de cerrar (x)
+    botonCerrar.addEventListener("click", cerrarModal);
+
+    // Detectar click fuera del cuadro blanco (en el fondo oscuro) para cerrar
+    window.addEventListener("click", (event) => {
+        if (event.target == modal) {
+            cerrarModal();
+        }
+    });
+</script>
+
+ <div id="contenedor-modal" class="modal-oculto">
+        <div class="modal-contenido">
+            <span class="boton-cerrar" id="cerrar-modal">&times;</span>
+            <h4 id="titulo-definicion">Título</h4>
+            <p id="texto-definicion">Definición...</p>
+        </div>
+    </div>
+
+    <div id="lightbox-visor" class="lightbox-overlay">
+        <img id="imagen-maximizada" class="lightbox-imagen-ampliada" src="" alt="Visualización detallada">
+    </div>   
+
+</body>
+</html>
